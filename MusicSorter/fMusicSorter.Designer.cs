@@ -33,6 +33,7 @@
             this.tbInputFolder = new System.Windows.Forms.TextBox();
             this.lInputFolder = new System.Windows.Forms.Label();
             this.fbdInput = new System.Windows.Forms.FolderBrowserDialog();
+            this.tbTest = new System.Windows.Forms.TextBox();
             this.gbInputFiles.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +45,7 @@
             this.gbInputFiles.Dock = System.Windows.Forms.DockStyle.Top;
             this.gbInputFiles.Location = new System.Drawing.Point(0, 0);
             this.gbInputFiles.Name = "gbInputFiles";
-            this.gbInputFiles.Size = new System.Drawing.Size(731, 49);
+            this.gbInputFiles.Size = new System.Drawing.Size(731, 48);
             this.gbInputFiles.TabIndex = 0;
             this.gbInputFiles.TabStop = false;
             this.gbInputFiles.Text = "Input Files";
@@ -83,17 +84,27 @@
             this.fbdInput.Description = "Select Folder to Pick Files From";
             this.fbdInput.ShowNewFolderButton = false;
             // 
+            // tbTest
+            // 
+            this.tbTest.Location = new System.Drawing.Point(92, 105);
+            this.tbTest.Multiline = true;
+            this.tbTest.Name = "tbTest";
+            this.tbTest.Size = new System.Drawing.Size(533, 281);
+            this.tbTest.TabIndex = 1;
+            // 
             // fMusicSorter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(731, 273);
+            this.ClientSize = new System.Drawing.Size(731, 440);
+            this.Controls.Add(this.tbTest);
             this.Controls.Add(this.gbInputFiles);
             this.Name = "fMusicSorter";
             this.Text = "Music Sorter";
             this.gbInputFiles.ResumeLayout(false);
             this.gbInputFiles.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -104,6 +115,7 @@
         private System.Windows.Forms.TextBox tbInputFolder;
         private System.Windows.Forms.Label lInputFolder;
         private System.Windows.Forms.FolderBrowserDialog fbdInput;
+        private System.Windows.Forms.TextBox tbTest;
     }
 }
 
