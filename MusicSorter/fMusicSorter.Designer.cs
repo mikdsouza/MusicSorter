@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMusicSorter));
             this.gbInputFiles = new System.Windows.Forms.GroupBox();
             this.bInputBrowse = new System.Windows.Forms.Button();
             this.tbInputFolder = new System.Windows.Forms.TextBox();
@@ -258,6 +259,7 @@
             this.Controls.Add(this.gbDetails);
             this.Controls.Add(this.lbFiles);
             this.Controls.Add(this.gbInputFiles);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fMusicSorter";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.Text = "Music Sorter";

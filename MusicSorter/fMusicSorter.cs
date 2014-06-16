@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Globalization;
 
 namespace MusicSorter
 {
@@ -59,7 +60,7 @@ namespace MusicSorter
             TagLib.File f = TagLib.File.Create(lbFiles.SelectedItem.ToString());
             tbTrackNo.Text = f.Tag.Track.ToString();
             tbTitle.Text = f.Tag.Title;
-            tbArtist.Text = f.Tag.FirstAlbumArtist;
+            tbArtist.Text = f.Tag.FirstPerformer;
             tbAlbum.Text = f.Tag.Album;
         }
 
@@ -70,50 +71,80 @@ namespace MusicSorter
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
+
+                TextInfo textInfo = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo;
+
                 String targetDir = Directory.CreateDirectory(tbInputFolder.Text + "\\output").FullName + "\\";
                 foreach (String filename in lbFiles.Items)
                 {
-                    String newFileName = "", newFolderName = "";
-
-                    TagLib.Tag t = TagLib.File.Create(filename).Tag;
-
-                    if (t.Track != 0)
-                        newFileName += String.Format("{0,-2:D2}", t.Track) + " - ";
-
-                    if (t.Title != null)
-                        newFileName += t.Title;
-                    else
-                        newFileName += Path.GetFileNameWithoutExtension(filename);
-
-                    //newFileName += Path.GetExtension(filename);
-
-                    if (t.FirstAlbumArtist == null)
-                        newFolderName = "Unknown Artist\\";
-                    else
-                        newFolderName = t.FirstAlbumArtist + "\\";
-
-                    if (t.Album == null)
-                        newFolderName += "UnknownAlbum\\";
-                    else
-                        newFolderName += t.Album + "\\";
-
-                    String finalPath = targetDir + newFolderName + newFileName;
-
-                    if (finalPath + Path.GetExtension(filename) != filename)
+                    try
                     {
-                        while (File.Exists(finalPath + Path.GetExtension(filename)))
-                            finalPath += " (copy)";
-                    }
+                        String newFileName = "", newFolderName = "";
 
-                    Directory.CreateDirectory(targetDir + newFolderName);
-                    File.Move(filename, finalPath + Path.GetExtension(filename));
+                        TagLib.Tag t = TagLib.File.Create(filename).Tag;
+
+                        if (t.Track != 0)
+                            newFileName += String.Format("{0,-2:D2}", t.Track) + " - ";
+
+                        if (t.Title != null)
+                            newFileName += textInfo.ToTitleCase(t.Title);
+                        else
+                            newFileName += Path.GetFileNameWithoutExtension(filename);
+
+                        //newFileName += Path.GetExtension(filename);
+
+                        if (t.FirstPerformer == null)
+                            newFolderName = "Unknown Artist\\";
+                        else
+                            newFolderName = textInfo.ToTitleCase(t.FirstPerformer) + "\\";
+
+                        if (t.Album == null)
+                            newFolderName += "Unknown Album\\";
+                        else
+                            newFolderName += textInfo.ToTitleCase(t.Album) + "\\";
+
+                        //Correct the file names to not contain any : or &
+                        newFileName = correctString(newFileName);
+                        newFolderName = correctString(newFolderName);
+
+                        String finalPath = targetDir + newFolderName + newFileName;
+
+                        if (finalPath + Path.GetExtension(filename) != filename)
+                        {
+                            while (File.Exists(finalPath + Path.GetExtension(filename)))
+                                finalPath += " (copy)";
+                        }
+
+                        Directory.CreateDirectory(targetDir + newFolderName);
+                        File.Move(filename, finalPath + Path.GetExtension(filename));
+
+                    }
+                    catch (TagLib.CorruptFileException)
+                    {
+                        MessageBox.Show(filename + " is corrupt. Ignoring file");
+                    }
                 }
+
+                MessageBox.Show("Done!");
             }
             finally
             {
                 Cursor.Current = current;
                 current.Dispose();
             }
+        }
+
+        private String correctString(String input)
+        {
+            String result = input;
+
+            result = result.Replace(":", "");
+            result = result.Replace("&", "and");
+            result = result.Replace("/", ",");
+            result = result.Replace("?", "");
+            result = result.Replace("*", "");
+
+            return result;
         }
 
     }
