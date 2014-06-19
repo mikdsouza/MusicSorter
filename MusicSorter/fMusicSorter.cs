@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Globalization;
+using MusicSorter.Tag;
 
 namespace MusicSorter
 {
     public partial class fMusicSorter : Form
     {
+        private TagAdapter currentFile;
+
         public fMusicSorter()
         {
             InitializeComponent();
@@ -34,10 +37,7 @@ namespace MusicSorter
             if (fbdInput.ShowDialog() == DialogResult.OK)
             {
                 tbInputFolder.Text = fbdInput.SelectedPath;
-
-                lbFiles.Items.Clear();
-                //Get all the files from that folder
-                lbFiles.Items.AddRange(getFiles(tbInputFolder.Text, new String[3] { "*.mp3", "*.m4a", "*.wma" }).ToArray());
+                prepareFileList();
             }
         }
 
@@ -54,14 +54,28 @@ namespace MusicSorter
 
         private void lbFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tbLocation.Text = Path.GetDirectoryName(lbFiles.SelectedItem.ToString());
-            tbFileName.Text = Path.GetFileName(lbFiles.SelectedItem.ToString());
+            try
+            {
+                currentFile = new TagLibAdapter(lbFiles.SelectedItem.ToString());
+                tbLocation.Text = Path.GetDirectoryName(currentFile.Filename);
+                tbFileName.Text = Path.GetFileName(currentFile.Filename);
 
-            TagLib.File f = TagLib.File.Create(lbFiles.SelectedItem.ToString());
-            tbTrackNo.Text = f.Tag.Track.ToString();
-            tbTitle.Text = f.Tag.Title;
-            tbArtist.Text = f.Tag.FirstPerformer;
-            tbAlbum.Text = f.Tag.Album;
+                tbTrackNo.Text = currentFile.TrackNo.ToString();
+                tbTitle.Text = currentFile.Title;
+                tbArtist.Text = currentFile.Artist;
+                tbAlbum.Text = currentFile.Album;
+            }
+            catch (TagLib.CorruptFileException)
+            {
+                MessageBox.Show(lbFiles.SelectedItem.ToString() + " is corrupt. Ignoring file");
+                currentFile = null;
+                tbTrackNo.Clear();
+                tbTitle.Clear();
+                tbArtist.Clear();
+                tbAlbum.Clear();
+                tbLocation.Clear();
+                tbFileName.Clear();
+            }
         }
 
         private void bProcess_Click(object sender, EventArgs e)
@@ -79,44 +93,8 @@ namespace MusicSorter
                 {
                     try
                     {
-                        String newFileName = "", newFolderName = "";
-
-                        TagLib.Tag t = TagLib.File.Create(filename).Tag;
-
-                        if (t.Track != 0)
-                            newFileName += String.Format("{0,-2:D2}", t.Track) + " - ";
-
-                        if (t.Title != null)
-                            newFileName += textInfo.ToTitleCase(t.Title);
-                        else
-                            newFileName += Path.GetFileNameWithoutExtension(filename);
-
-                        //newFileName += Path.GetExtension(filename);
-
-                        if (t.FirstPerformer == null)
-                            newFolderName = "Unknown Artist\\";
-                        else
-                            newFolderName = textInfo.ToTitleCase(t.FirstPerformer) + "\\";
-
-                        if (t.Album == null)
-                            newFolderName += "Unknown Album\\";
-                        else
-                            newFolderName += textInfo.ToTitleCase(t.Album) + "\\";
-
-                        //Correct the file names to not contain any : or &
-                        newFileName = correctString(newFileName);
-                        newFolderName = correctString(newFolderName);
-
-                        String finalPath = targetDir + newFolderName + newFileName;
-
-                        if (finalPath + Path.GetExtension(filename) != filename)
-                        {
-                            while (File.Exists(finalPath + Path.GetExtension(filename)))
-                                finalPath += " (copy)";
-                        }
-
-                        Directory.CreateDirectory(targetDir + newFolderName);
-                        File.Move(filename, finalPath + Path.GetExtension(filename));
+                        TagAdapter tg = new TagLibAdapter(filename);
+                        tg.moveFile(targetDir);
 
                     }
                     catch (TagLib.CorruptFileException)
@@ -125,6 +103,7 @@ namespace MusicSorter
                     }
                 }
 
+                prepareFileList();
                 MessageBox.Show("Done!");
             }
             finally
@@ -134,17 +113,12 @@ namespace MusicSorter
             }
         }
 
-        private String correctString(String input)
+        private void prepareFileList()
         {
-            String result = input;
-
-            result = result.Replace(":", "");
-            result = result.Replace("&", "and");
-            result = result.Replace("/", ",");
-            result = result.Replace("?", "");
-            result = result.Replace("*", "");
-
-            return result;
+            lbFiles.Items.Clear();
+            //Get all the files from that folder
+            lbFiles.Items.AddRange(getFiles(tbInputFolder.Text, new String[3] 
+                    { "*.mp3", "*.m4a", "*.wma" }).ToArray());
         }
 
     }

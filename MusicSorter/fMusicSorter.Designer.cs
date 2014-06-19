@@ -36,18 +36,18 @@
             this.fbdInput = new System.Windows.Forms.FolderBrowserDialog();
             this.lbFiles = new System.Windows.Forms.ListBox();
             this.gbDetails = new System.Windows.Forms.GroupBox();
+            this.tbAlbum = new System.Windows.Forms.TextBox();
+            this.lAlbum = new System.Windows.Forms.Label();
+            this.tbArtist = new System.Windows.Forms.TextBox();
+            this.lArtist = new System.Windows.Forms.Label();
+            this.tbTitle = new System.Windows.Forms.TextBox();
+            this.lTitle = new System.Windows.Forms.Label();
             this.tbTrackNo = new System.Windows.Forms.TextBox();
             this.lTrackNo = new System.Windows.Forms.Label();
             this.tbFileName = new System.Windows.Forms.TextBox();
             this.tbLocation = new System.Windows.Forms.TextBox();
             this.lFileName = new System.Windows.Forms.Label();
             this.lLocation = new System.Windows.Forms.Label();
-            this.tbTitle = new System.Windows.Forms.TextBox();
-            this.lTitle = new System.Windows.Forms.Label();
-            this.tbArtist = new System.Windows.Forms.TextBox();
-            this.lArtist = new System.Windows.Forms.Label();
-            this.tbAlbum = new System.Windows.Forms.TextBox();
-            this.lAlbum = new System.Windows.Forms.Label();
             this.bProcess = new System.Windows.Forms.Button();
             this.gbInputFiles.SuspendLayout();
             this.gbDetails.SuspendLayout();
@@ -133,6 +133,60 @@
             this.gbDetails.TabStop = false;
             this.gbDetails.Text = "File Details";
             // 
+            // tbAlbum
+            // 
+            this.tbAlbum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAlbum.Location = new System.Drawing.Point(83, 175);
+            this.tbAlbum.Name = "tbAlbum";
+            this.tbAlbum.Size = new System.Drawing.Size(268, 20);
+            this.tbAlbum.TabIndex = 11;
+            // 
+            // lAlbum
+            // 
+            this.lAlbum.AutoSize = true;
+            this.lAlbum.Location = new System.Drawing.Point(44, 178);
+            this.lAlbum.Name = "lAlbum";
+            this.lAlbum.Size = new System.Drawing.Size(36, 13);
+            this.lAlbum.TabIndex = 10;
+            this.lAlbum.Text = "Album";
+            // 
+            // tbArtist
+            // 
+            this.tbArtist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbArtist.Location = new System.Drawing.Point(83, 149);
+            this.tbArtist.Name = "tbArtist";
+            this.tbArtist.Size = new System.Drawing.Size(268, 20);
+            this.tbArtist.TabIndex = 9;
+            // 
+            // lArtist
+            // 
+            this.lArtist.AutoSize = true;
+            this.lArtist.Location = new System.Drawing.Point(50, 152);
+            this.lArtist.Name = "lArtist";
+            this.lArtist.Size = new System.Drawing.Size(30, 13);
+            this.lArtist.TabIndex = 8;
+            this.lArtist.Text = "Artist";
+            // 
+            // tbTitle
+            // 
+            this.tbTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbTitle.Location = new System.Drawing.Point(83, 123);
+            this.tbTitle.Name = "tbTitle";
+            this.tbTitle.Size = new System.Drawing.Size(268, 20);
+            this.tbTitle.TabIndex = 7;
+            // 
+            // lTitle
+            // 
+            this.lTitle.AutoSize = true;
+            this.lTitle.Location = new System.Drawing.Point(50, 126);
+            this.lTitle.Name = "lTitle";
+            this.lTitle.Size = new System.Drawing.Size(27, 13);
+            this.lTitle.TabIndex = 6;
+            this.lTitle.Text = "Title";
+            // 
             // tbTrackNo
             // 
             this.tbTrackNo.Location = new System.Drawing.Point(83, 97);
@@ -185,60 +239,6 @@
             this.lLocation.Size = new System.Drawing.Size(48, 13);
             this.lLocation.TabIndex = 0;
             this.lLocation.Text = "Location";
-            // 
-            // tbTitle
-            // 
-            this.tbTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbTitle.Location = new System.Drawing.Point(83, 123);
-            this.tbTitle.Name = "tbTitle";
-            this.tbTitle.Size = new System.Drawing.Size(268, 20);
-            this.tbTitle.TabIndex = 7;
-            // 
-            // lTitle
-            // 
-            this.lTitle.AutoSize = true;
-            this.lTitle.Location = new System.Drawing.Point(50, 126);
-            this.lTitle.Name = "lTitle";
-            this.lTitle.Size = new System.Drawing.Size(27, 13);
-            this.lTitle.TabIndex = 6;
-            this.lTitle.Text = "Title";
-            // 
-            // tbArtist
-            // 
-            this.tbArtist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbArtist.Location = new System.Drawing.Point(83, 149);
-            this.tbArtist.Name = "tbArtist";
-            this.tbArtist.Size = new System.Drawing.Size(268, 20);
-            this.tbArtist.TabIndex = 9;
-            // 
-            // lArtist
-            // 
-            this.lArtist.AutoSize = true;
-            this.lArtist.Location = new System.Drawing.Point(50, 152);
-            this.lArtist.Name = "lArtist";
-            this.lArtist.Size = new System.Drawing.Size(30, 13);
-            this.lArtist.TabIndex = 8;
-            this.lArtist.Text = "Artist";
-            // 
-            // tbAlbum
-            // 
-            this.tbAlbum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbAlbum.Location = new System.Drawing.Point(83, 175);
-            this.tbAlbum.Name = "tbAlbum";
-            this.tbAlbum.Size = new System.Drawing.Size(268, 20);
-            this.tbAlbum.TabIndex = 11;
-            // 
-            // lAlbum
-            // 
-            this.lAlbum.AutoSize = true;
-            this.lAlbum.Location = new System.Drawing.Point(44, 178);
-            this.lAlbum.Name = "lAlbum";
-            this.lAlbum.Size = new System.Drawing.Size(36, 13);
-            this.lAlbum.TabIndex = 10;
-            this.lAlbum.Text = "Album";
             // 
             // bProcess
             // 
