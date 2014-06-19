@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Globalization;
 using MusicSorter.Tag;
+using System.Threading;
 
 namespace MusicSorter
 {
@@ -20,6 +21,7 @@ namespace MusicSorter
         public fMusicSorter()
         {
             InitializeComponent();
+            ThreadPool.SetMaxThreads(Environment.ProcessorCount, Environment.ProcessorCount);
         }
 
         private void bInputBrowse_Click(object sender, EventArgs e)
@@ -119,6 +121,56 @@ namespace MusicSorter
             //Get all the files from that folder
             lbFiles.Items.AddRange(getFiles(tbInputFolder.Text, new String[3] 
                     { "*.mp3", "*.m4a", "*.wma" }).ToArray());
+        }
+
+        private void bM4AtoMP3_Click(object sender, EventArgs e)
+        {
+            Cursor curCursor = Cursor.Current;
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                List<String> files = new List<string>();
+
+                foreach (String filename in lbFiles.Items)
+                {
+                    files.Add(filename);
+                }
+
+                files = files.Where(c => c.EndsWith(".m4a")).ToList();
+
+                foreach (string file in files)
+                {
+                    ThreadPool.QueueUserWorkItem(new WaitCallback(convertFile), file);
+                    //convertFile(file);
+                }
+            }
+            finally
+            {
+                Cursor.Current = curCursor;
+                prepareFileList();
+            }
+        }
+
+        private void convertFile(Object file)
+        {
+            String filename = (String)file;
+            String outFile = Path.GetDirectoryName(filename) + "\\" +
+                Path.GetFileNameWithoutExtension(filename) + ".mp3";
+            String command = String.Format("-i \"{0}\" -id3v2_version 3 " +
+                "-acodec libmp3lame -q:a 0 -y \"{1}\"", filename, outFile);
+            try
+            {
+                System.Diagnostics.Process.Start("ffmpeg", command).WaitForExit();
+
+                if (chkConvDelete.Checked)
+                {
+                    File.Delete(filename);
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Could not convert " + filename + "\n" + exp.Message);
+            }
         }
 
     }
