@@ -119,11 +119,16 @@ namespace MusicSorter
         {
             lbFiles.Items.Clear();
             //Get all the files from that folder
-            lbFiles.Items.AddRange(getFiles(tbInputFolder.Text, new String[3] 
-                    { "*.mp3", "*.m4a", "*.wma" }).ToArray());
+            lbFiles.Items.AddRange(getFiles(tbInputFolder.Text, new String[4] 
+                    { "*.mp3", "*.m4a", "*.wma", "*.flac" }).ToArray());
         }
 
         private void bM4AtoMP3_Click(object sender, EventArgs e)
+        {
+            convertFormatToMP3(".m4a");
+        }
+
+        private void convertFormatToMP3(String format)
         {
             Cursor curCursor = Cursor.Current;
             try
@@ -136,7 +141,7 @@ namespace MusicSorter
                     files.Add(filename);
                 }
 
-                files = files.Where(c => c.EndsWith(".m4a")).ToList();
+                files = files.Where(c => c.EndsWith(format)).ToList();
 
                 foreach (string file in files)
                 {
@@ -171,6 +176,11 @@ namespace MusicSorter
             {
                 MessageBox.Show("Could not convert " + filename + "\n" + exp.Message);
             }
+        }
+
+        private void bFLACtoMP3_Click(object sender, EventArgs e)
+        {
+            convertFormatToMP3(".flac");
         }
 
     }

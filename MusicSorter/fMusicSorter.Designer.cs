@@ -37,7 +37,6 @@
             this.lbFiles = new System.Windows.Forms.ListBox();
             this.tcOptions = new System.Windows.Forms.TabControl();
             this.tpDetails = new System.Windows.Forms.TabPage();
-            this.tpOrganiseFiles = new System.Windows.Forms.TabPage();
             this.gbDetails = new System.Windows.Forms.GroupBox();
             this.tbAlbum = new System.Windows.Forms.TextBox();
             this.lAlbum = new System.Windows.Forms.Label();
@@ -51,15 +50,17 @@
             this.tbLocation = new System.Windows.Forms.TextBox();
             this.lFileName = new System.Windows.Forms.Label();
             this.lLocation = new System.Windows.Forms.Label();
+            this.tpOrganiseFiles = new System.Windows.Forms.TabPage();
             this.bProcess = new System.Windows.Forms.Button();
             this.tpConvert = new System.Windows.Forms.TabPage();
-            this.bM4AtoMP3 = new System.Windows.Forms.Button();
             this.chkConvDelete = new System.Windows.Forms.CheckBox();
+            this.bM4AtoMP3 = new System.Windows.Forms.Button();
+            this.bFLACtoMP3 = new System.Windows.Forms.Button();
             this.gbInputFiles.SuspendLayout();
             this.tcOptions.SuspendLayout();
             this.tpDetails.SuspendLayout();
-            this.tpOrganiseFiles.SuspendLayout();
             this.gbDetails.SuspendLayout();
+            this.tpOrganiseFiles.SuspendLayout();
             this.tpConvert.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,17 +143,6 @@
             this.tpDetails.TabIndex = 0;
             this.tpDetails.Text = "Song Details";
             this.tpDetails.UseVisualStyleBackColor = true;
-            // 
-            // tpOrganiseFiles
-            // 
-            this.tpOrganiseFiles.Controls.Add(this.bProcess);
-            this.tpOrganiseFiles.Location = new System.Drawing.Point(4, 22);
-            this.tpOrganiseFiles.Name = "tpOrganiseFiles";
-            this.tpOrganiseFiles.Padding = new System.Windows.Forms.Padding(3);
-            this.tpOrganiseFiles.Size = new System.Drawing.Size(343, 503);
-            this.tpOrganiseFiles.TabIndex = 1;
-            this.tpOrganiseFiles.Text = "Organise Files";
-            this.tpOrganiseFiles.UseVisualStyleBackColor = true;
             // 
             // gbDetails
             // 
@@ -283,6 +273,17 @@
             this.lLocation.TabIndex = 0;
             this.lLocation.Text = "Location";
             // 
+            // tpOrganiseFiles
+            // 
+            this.tpOrganiseFiles.Controls.Add(this.bProcess);
+            this.tpOrganiseFiles.Location = new System.Drawing.Point(4, 22);
+            this.tpOrganiseFiles.Name = "tpOrganiseFiles";
+            this.tpOrganiseFiles.Padding = new System.Windows.Forms.Padding(3);
+            this.tpOrganiseFiles.Size = new System.Drawing.Size(343, 503);
+            this.tpOrganiseFiles.TabIndex = 1;
+            this.tpOrganiseFiles.Text = "Organise Files";
+            this.tpOrganiseFiles.UseVisualStyleBackColor = true;
+            // 
             // bProcess
             // 
             this.bProcess.Dock = System.Windows.Forms.DockStyle.Top;
@@ -295,8 +296,9 @@
             // 
             // tpConvert
             // 
-            this.tpConvert.Controls.Add(this.chkConvDelete);
+            this.tpConvert.Controls.Add(this.bFLACtoMP3);
             this.tpConvert.Controls.Add(this.bM4AtoMP3);
+            this.tpConvert.Controls.Add(this.chkConvDelete);
             this.tpConvert.Location = new System.Drawing.Point(4, 22);
             this.tpConvert.Name = "tpConvert";
             this.tpConvert.Padding = new System.Windows.Forms.Padding(3);
@@ -305,10 +307,21 @@
             this.tpConvert.Text = "Convert To Format";
             this.tpConvert.UseVisualStyleBackColor = true;
             // 
+            // chkConvDelete
+            // 
+            this.chkConvDelete.AutoSize = true;
+            this.chkConvDelete.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkConvDelete.Location = new System.Drawing.Point(3, 3);
+            this.chkConvDelete.Name = "chkConvDelete";
+            this.chkConvDelete.Size = new System.Drawing.Size(337, 17);
+            this.chkConvDelete.TabIndex = 0;
+            this.chkConvDelete.Text = "Delete Original File";
+            this.chkConvDelete.UseVisualStyleBackColor = true;
+            // 
             // bM4AtoMP3
             // 
             this.bM4AtoMP3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bM4AtoMP3.Location = new System.Drawing.Point(3, 3);
+            this.bM4AtoMP3.Location = new System.Drawing.Point(3, 20);
             this.bM4AtoMP3.Name = "bM4AtoMP3";
             this.bM4AtoMP3.Size = new System.Drawing.Size(337, 23);
             this.bM4AtoMP3.TabIndex = 1;
@@ -316,16 +329,16 @@
             this.bM4AtoMP3.UseVisualStyleBackColor = true;
             this.bM4AtoMP3.Click += new System.EventHandler(this.bM4AtoMP3_Click);
             // 
-            // chkConvDelete
+            // bFLACtoMP3
             // 
-            this.chkConvDelete.AutoSize = true;
-            this.chkConvDelete.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkConvDelete.Location = new System.Drawing.Point(3, 26);
-            this.chkConvDelete.Name = "chkConvDelete";
-            this.chkConvDelete.Size = new System.Drawing.Size(337, 17);
-            this.chkConvDelete.TabIndex = 0;
-            this.chkConvDelete.Text = "Delete Original File";
-            this.chkConvDelete.UseVisualStyleBackColor = true;
+            this.bFLACtoMP3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bFLACtoMP3.Location = new System.Drawing.Point(3, 43);
+            this.bFLACtoMP3.Name = "bFLACtoMP3";
+            this.bFLACtoMP3.Size = new System.Drawing.Size(337, 23);
+            this.bFLACtoMP3.TabIndex = 2;
+            this.bFLACtoMP3.Text = "Convert FLAC to mp3";
+            this.bFLACtoMP3.UseVisualStyleBackColor = true;
+            this.bFLACtoMP3.Click += new System.EventHandler(this.bFLACtoMP3_Click);
             // 
             // fMusicSorter
             // 
@@ -343,9 +356,9 @@
             this.gbInputFiles.PerformLayout();
             this.tcOptions.ResumeLayout(false);
             this.tpDetails.ResumeLayout(false);
-            this.tpOrganiseFiles.ResumeLayout(false);
             this.gbDetails.ResumeLayout(false);
             this.gbDetails.PerformLayout();
+            this.tpOrganiseFiles.ResumeLayout(false);
             this.tpConvert.ResumeLayout(false);
             this.tpConvert.PerformLayout();
             this.ResumeLayout(false);
@@ -380,6 +393,7 @@
         private System.Windows.Forms.TabPage tpConvert;
         private System.Windows.Forms.Button bM4AtoMP3;
         private System.Windows.Forms.CheckBox chkConvDelete;
+        private System.Windows.Forms.Button bFLACtoMP3;
     }
 }
 
