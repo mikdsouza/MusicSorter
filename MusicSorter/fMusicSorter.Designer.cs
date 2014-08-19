@@ -113,7 +113,8 @@
             // 
             // lbFiles
             // 
-            this.lbFiles.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lbFiles.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lbFiles.FormattingEnabled = true;
             this.lbFiles.Location = new System.Drawing.Point(3, 51);
             this.lbFiles.Name = "lbFiles";
