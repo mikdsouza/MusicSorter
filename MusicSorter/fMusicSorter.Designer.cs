@@ -53,9 +53,9 @@
             this.tpOrganiseFiles = new System.Windows.Forms.TabPage();
             this.bProcess = new System.Windows.Forms.Button();
             this.tpConvert = new System.Windows.Forms.TabPage();
-            this.chkConvDelete = new System.Windows.Forms.CheckBox();
-            this.bM4AtoMP3 = new System.Windows.Forms.Button();
             this.bFLACtoMP3 = new System.Windows.Forms.Button();
+            this.bM4AtoMP3 = new System.Windows.Forms.Button();
+            this.chkConvDelete = new System.Windows.Forms.CheckBox();
             this.gbInputFiles.SuspendLayout();
             this.tcOptions.SuspendLayout();
             this.tpDetails.SuspendLayout();
@@ -293,6 +293,7 @@
             this.bProcess.TabIndex = 4;
             this.bProcess.Text = "Organise Files";
             this.bProcess.UseVisualStyleBackColor = true;
+            this.bProcess.Click += new System.EventHandler(this.bProcess_Click);
             // 
             // tpConvert
             // 
@@ -307,16 +308,16 @@
             this.tpConvert.Text = "Convert To Format";
             this.tpConvert.UseVisualStyleBackColor = true;
             // 
-            // chkConvDelete
+            // bFLACtoMP3
             // 
-            this.chkConvDelete.AutoSize = true;
-            this.chkConvDelete.Dock = System.Windows.Forms.DockStyle.Top;
-            this.chkConvDelete.Location = new System.Drawing.Point(3, 3);
-            this.chkConvDelete.Name = "chkConvDelete";
-            this.chkConvDelete.Size = new System.Drawing.Size(337, 17);
-            this.chkConvDelete.TabIndex = 0;
-            this.chkConvDelete.Text = "Delete Original File";
-            this.chkConvDelete.UseVisualStyleBackColor = true;
+            this.bFLACtoMP3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.bFLACtoMP3.Location = new System.Drawing.Point(3, 43);
+            this.bFLACtoMP3.Name = "bFLACtoMP3";
+            this.bFLACtoMP3.Size = new System.Drawing.Size(337, 23);
+            this.bFLACtoMP3.TabIndex = 2;
+            this.bFLACtoMP3.Text = "Convert FLAC to mp3";
+            this.bFLACtoMP3.UseVisualStyleBackColor = true;
+            this.bFLACtoMP3.Click += new System.EventHandler(this.bFLACtoMP3_Click);
             // 
             // bM4AtoMP3
             // 
@@ -329,16 +330,16 @@
             this.bM4AtoMP3.UseVisualStyleBackColor = true;
             this.bM4AtoMP3.Click += new System.EventHandler(this.bM4AtoMP3_Click);
             // 
-            // bFLACtoMP3
+            // chkConvDelete
             // 
-            this.bFLACtoMP3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bFLACtoMP3.Location = new System.Drawing.Point(3, 43);
-            this.bFLACtoMP3.Name = "bFLACtoMP3";
-            this.bFLACtoMP3.Size = new System.Drawing.Size(337, 23);
-            this.bFLACtoMP3.TabIndex = 2;
-            this.bFLACtoMP3.Text = "Convert FLAC to mp3";
-            this.bFLACtoMP3.UseVisualStyleBackColor = true;
-            this.bFLACtoMP3.Click += new System.EventHandler(this.bFLACtoMP3_Click);
+            this.chkConvDelete.AutoSize = true;
+            this.chkConvDelete.Dock = System.Windows.Forms.DockStyle.Top;
+            this.chkConvDelete.Location = new System.Drawing.Point(3, 3);
+            this.chkConvDelete.Name = "chkConvDelete";
+            this.chkConvDelete.Size = new System.Drawing.Size(337, 17);
+            this.chkConvDelete.TabIndex = 0;
+            this.chkConvDelete.Text = "Delete Original File";
+            this.chkConvDelete.UseVisualStyleBackColor = true;
             // 
             // fMusicSorter
             // 
